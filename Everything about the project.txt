@@ -2,3 +2,5 @@
 - Breeze
 - Seeders
 - Enums
+- CRUD with Breeze
+- Middleware
