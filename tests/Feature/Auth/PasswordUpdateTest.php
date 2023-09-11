@@ -10,6 +10,7 @@ use Tests\TestCase;
 class PasswordUpdateTest extends TestCase
 {
     use RefreshDatabase;
+    public $seed = true;
 
     public function test_password_can_be_updated(): void
     {

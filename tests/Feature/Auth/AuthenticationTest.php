@@ -10,6 +10,7 @@ use Tests\TestCase;
 class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
+    public $seed = true;
 
     public function test_login_screen_can_be_rendered(): void
     {
