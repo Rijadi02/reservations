@@ -2,18 +2,17 @@
 
 namespace App\Policies;
 
-use App\Models\Company;
+use App\Models\Activity;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 use App\Enums\Role;
+use App\Models\Company;
 
-class CompanyUserPolicy
+class CompanyActivityPolicy
 {
-    //Kjo before eshte e para qe bohet run, nese kjo eshte false, athere bohen ruj
-    //te tjerat
+
     public function before(User $user): bool|null
     {
-        //Kjo e lejon userin me hi ku don, perderisa eshte admin
         if ($user->role_id === Role::ADMINISTRATOR->value) {
             return true;
         }
@@ -23,8 +22,6 @@ class CompanyUserPolicy
 
     public function viewAny(User $user, Company $company): bool
     {
-        //Nese roli i Userit eshte admin edhe eshte comapny_id eshte e qesaj kompanis
-        //Kjo e bon return true
         return $user->role_id === Role::COMPANY_OWNER->value && $user->company_id === $company->id;
     }
 
@@ -33,13 +30,13 @@ class CompanyUserPolicy
         return $user->role_id === Role::COMPANY_OWNER->value && $user->company_id === $company->id;
     }
 
-    public function update(User $user, Company $company): bool
+    public function update(User $user, Activity $activity): bool
     {
-        return $user->role_id === Role::COMPANY_OWNER->value && $user->company_id === $company->id;
+        return $user->role_id === Role::COMPANY_OWNER->value && $user->company_id === $activity->company_id;
     }
 
-    public function delete(User $user, Company $company): bool
+    public function delete(User $user, Activity $activity): bool
     {
-        return $user->role_id === Role::COMPANY_OWNER->value && $user->company_id === $company->id;
+        return $user->role_id === Role::COMPANY_OWNER->value && $user->company_id === $activity->company_id;
     }
 }

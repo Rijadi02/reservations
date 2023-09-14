@@ -6,3 +6,5 @@
 - Middleware
 - SoftDelete
 - Policy / Policies
+- Store Images/Files
+- Accessors and Mutators
