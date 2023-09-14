@@ -17,14 +17,17 @@
                     </x-nav-link>
 
                     @if(auth()->user()->role_id === 1)
-                    <x-nav-link :href="route('companies.index')" :active="request()->routeIs('companies.index')">
-                        {{ __('Companies') }}
-                    </x-nav-link>
+                        <x-nav-link :href="route('companies.index')" :active="request()->routeIs('companies.index')">
+                            {{ __('Companies') }}
+                        </x-nav-link>
                     @endif
 
                     @if(auth()->user()->role_id === \App\Enums\Role::COMPANY_OWNER->value)
                         <x-nav-link :href="route('companies.users.index', auth()->user()->company_id)" :active="request()->routeIs('companies.users.*')">
                             {{ __('Administrators') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('companies.guides.index', auth()->user()->company_id)" :active="request()->routeIs('companies.guides.*')">
+                            {{ __('Guides') }}
                         </x-nav-link>
                     @endif
                 </div>

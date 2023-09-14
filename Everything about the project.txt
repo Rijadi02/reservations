@@ -4,3 +4,5 @@
 - Enums
 - CRUD with Breeze
 - Middleware
+- SoftDelete
+- Policy / Policies
