@@ -32,15 +32,18 @@ class CompanyGuideController extends Controller
     {
         $this->authorize('create', $company);
 
-        $company->users()->create([
-            'name' => $request->input('name'),
+        $invitation = UserInvitation::create([
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
+            'token' => Str::uuid(),
+            'company_id' => $company->id,
             'role_id' => Role::GUIDE->value,
         ]);
 
+        Mail::to($request->input('email'))->send(new UserRegistrationInvite($invitation));
+
         return to_route('companies.guides.index', $company);
     }
+
 
     public function edit(Company $company, User $guide)
     {
